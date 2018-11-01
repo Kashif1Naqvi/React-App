@@ -7,12 +7,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-    this.performSearch();
+    // this.performSearch("ant man");
+        this.performSearch("ant man");
+
   }
-  performSearch() {
+  performSearch(searchTerm) {
     console.log("performsearch using moviedb");
-    const urlString =
-      "https://api.themoviedb.org/3/search/movie?query=marvel&api_key=1b5adf76a72a13bad99b8fc0c68cb085";
+    // const urlString ="https://api.themoviedb.org/3/search/movie?query=woman&api_key=1b5adf76a72a13bad99b8fc0c68cb085";
+    const urlString ="https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=" + searchTerm;
+    
     $.ajax({
       url: urlString,
       success: searchResults => {
@@ -23,8 +26,10 @@ class App extends Component {
         var movieRows = [];
 
         results.forEach(movie => {
-          console.log(movie.title);
-          const movieRow = <MovieRow movie={movie}/>
+          // console.log(movie.title);
+          movie.poster_src = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
+          // console.log(movie.poster_src)
+          const movieRow = <MovieRow key={movie.id} movie={movie}/>
           movieRows.push(movieRow)
         })
         this.setState({rows: movieRows})
@@ -33,6 +38,12 @@ class App extends Component {
         console.error("faild to fetch data ");
       }
     });
+  }
+  searchChangeHandler(e){
+    e.preventDefault();
+    console.log(e.target.value)
+    const searchTerm = e.target.value;
+    this.performSearch(searchTerm);
   }
   render() {
     return (
@@ -58,6 +69,7 @@ class App extends Component {
             paddingTop: 8,
             paddingLeft: 16
           }}
+          onChange={this.searchChangeHandler.bind(this)}
           placeholder="Enter search"
         />
         {this.state.rows}
