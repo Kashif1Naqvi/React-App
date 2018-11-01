@@ -7,7 +7,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-    // this.performSearch("ant man");
         this.performSearch("ant man");
 
   }
@@ -47,14 +46,13 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <table className="titleBar">
           <tbody>
             <tr>
               <td>
                 <img width="90" height="90"  src={green} alt="app icon" />
               </td>
-              <td width="8" />
               <td>
                 <h1>MovieDB Search</h1>
               </td>
