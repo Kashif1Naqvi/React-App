@@ -52,7 +52,7 @@ class App extends Component {
           <tbody>
             <tr>
               <td>
-                <img width="50" src={green} alt="app icon" />
+                <img width="90" height="90"  src={green} alt="app icon" />
               </td>
               <td width="8" />
               <td>
