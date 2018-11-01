@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 import green from "./green.png";
 import $ from "jquery";
+import MovieRow from './MovieRow';
 class App extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {}
     this.performSearch();
   }
   performSearch() {
@@ -23,7 +24,7 @@ class App extends Component {
 
         results.forEach(movie => {
           console.log(movie.title);
-          const movieRow = <MovieRow movie={movie} />
+          const movieRow = <MovieRow movie={movie}/>
           movieRows.push(movieRow)
         })
         this.setState({rows: movieRows})
@@ -59,6 +60,7 @@ class App extends Component {
           }}
           placeholder="Enter search"
         />
+        {this.state.rows}
       </div>
     );
   }
